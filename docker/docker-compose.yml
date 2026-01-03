@@ -259,7 +259,7 @@ services:
       IMGPROXY_ENABLE_WEBP_DETECTION: ${IMGPROXY_ENABLE_WEBP_DETECTION}
 
   meta:
-    image: supabase/postgres-meta:0.95.1
+    image: supabase/postgres-meta:v0.95.1
     restart: unless-stopped
     depends_on:
       analytics:
