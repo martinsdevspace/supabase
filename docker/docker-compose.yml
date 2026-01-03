@@ -10,7 +10,7 @@ name: supabase
 services:
 
   studio:
-    container_name: supabase-studio
+    # container_name: supabase-studio
     image: supabase/studio:2025.12.17-sha-43f4f7f
     restart: unless-stopped
     healthcheck:
@@ -61,12 +61,12 @@ services:
       # NEXT_ANALYTICS_BACKEND_PROVIDER: bigquery
 
   kong:
-    container_name: supabase-kong
+    # container_name: supabase-kong
     image: kong:2.8.1
     restart: unless-stopped
-    ports:
-      - ${KONG_HTTP_PORT}:8000/tcp
-      - ${KONG_HTTPS_PORT}:8443/tcp
+    # ports:
+    #   - ${KONG_HTTP_PORT}:8000/tcp
+    #   - ${KONG_HTTPS_PORT}:8443/tcp
     volumes:
       # https://github.com/supabase/supabase/issues/12661
       - ./volumes/api/kong.yml:/home/kong/temp.yml:ro,z
@@ -89,7 +89,7 @@ services:
     entrypoint: bash -c 'eval "echo \"$$(cat ~/temp.yml)\"" > ~/kong.yml && /docker-entrypoint.sh kong docker-start'
 
   auth:
-    container_name: supabase-auth
+    # container_name: supabase-auth
     image: supabase/gotrue:v2.184.0
     restart: unless-stopped
     healthcheck:
@@ -172,7 +172,7 @@ services:
       # GOTRUE_HOOK_SEND_EMAIL_SECRETS: "v1,whsec_VGhpcyBpcyBhbiBleGFtcGxlIG9mIGEgc2hvcnRlciBCYXNlNjQgc3RyaW5n"
 
   rest:
-    container_name: supabase-rest
+    # container_name: supabase-rest
     image: postgrest/postgrest:v14.1
     restart: unless-stopped
     depends_on:
@@ -196,7 +196,7 @@ services:
 
   realtime:
     # This container name looks inconsistent but is correct because realtime constructs tenant id by parsing the subdomain
-    container_name: realtime-dev.supabase-realtime
+    # container_name: realtime-dev.supabase-realtime
     image: supabase/realtime:v2.68.0
     restart: unless-stopped
     depends_on:
@@ -234,7 +234,7 @@ services:
 
   # To use S3 backed storage: docker compose -f docker-compose.yml -f docker-compose.s3.yml up
   storage:
-    container_name: supabase-storage
+    # container_name: supabase-storage
     image: supabase/storage-api:v1.33.0
     restart: unless-stopped
     volumes:
@@ -278,7 +278,7 @@ services:
       IMGPROXY_URL: http://imgproxy:5001
 
   imgproxy:
-    container_name: supabase-imgproxy
+    # container_name: supabase-imgproxy
     image: darthsim/imgproxy:v3.8.0
     restart: unless-stopped
     volumes:
@@ -300,7 +300,7 @@ services:
       IMGPROXY_ENABLE_WEBP_DETECTION: ${IMGPROXY_ENABLE_WEBP_DETECTION}
 
   meta:
-    container_name: supabase-meta
+    # container_name: supabase-meta
     image: supabase/postgres-meta:v0.95.1
     restart: unless-stopped
     depends_on:
@@ -319,7 +319,7 @@ services:
       CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
 
   functions:
-    container_name: supabase-edge-functions
+    # container_name: supabase-edge-functions
     image: supabase/edge-runtime:v1.69.28
     restart: unless-stopped
     volumes:
@@ -343,11 +343,11 @@ services:
       ]
 
   analytics:
-    container_name: supabase-analytics
+    # container_name: supabase-analytics
     image: supabase/logflare:1.27.0
     restart: unless-stopped
-    ports:
-      - 4000:4000
+    # ports:
+    #   - 4000:4000
     # Uncomment to use Big Query backend for analytics
     # volumes:
     #   - type: bind
@@ -391,7 +391,7 @@ services:
 
   # Comment out everything below this point if you are using an external Postgres database
   db:
-    container_name: supabase-db
+    # container_name: supabase-db
     image: supabase/postgres:15.8.1.085
     restart: unless-stopped
     volumes:
@@ -448,7 +448,7 @@ services:
       ]
 
   vector:
-    container_name: supabase-vector
+    # container_name: supabase-vector
     image: timberio/vector:0.28.1-alpine
     restart: unless-stopped
     volumes:
@@ -479,12 +479,12 @@ services:
 
   # Update the DATABASE_URL if you are using an external Postgres database
   supavisor:
-    container_name: supabase-pooler
+    # container_name: supabase-pooler
     image: supabase/supavisor:2.7.4
     restart: unless-stopped
-    ports:
-      - ${POSTGRES_PORT}:5432
-      - ${POOLER_PROXY_PORT_TRANSACTION}:6543
+    # ports:
+    #   - ${POSTGRES_PORT}:5432
+    #   - ${POOLER_PROXY_PORT_TRANSACTION}:6543
     volumes:
       - ./volumes/pooler/pooler.exs:/etc/pooler/pooler.exs:ro,z
     healthcheck:
