@@ -310,9 +310,6 @@ services:
       LOGFLARE_PRIVATE_ACCESS_TOKEN: ${LOGFLARE_PRIVATE_ACCESS_TOKEN}
       LOGFLARE_SINGLE_TENANT: true
       LOGFLARE_SUPABASE_MODE: true
-      POSTGRES_BACKEND_URL: postgresql://supabase_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/_supabase
-      POSTGRES_BACKEND_SCHEMA: _analytics
-      LOGFLARE_FEATURE_FLAG_OVERRIDE: multibackend=true
 
   vector:
     image: timberio/vector:0.28.1-alpine
