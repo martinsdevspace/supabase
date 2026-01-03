@@ -315,7 +315,7 @@ services:
       LOGFLARE_FEATURE_FLAG_OVERRIDE: multibackend=true
 
   vector:
-    image: timberio/vector:0.52.0-alpine
+    image: timberio/vector:latest-alpine
     restart: unless-stopped
     volumes:
       - ./volumes/logs/vector.yml:/etc/vector/vector.yml:ro,z
@@ -387,7 +387,7 @@ services:
       ]
 
   db:
-    image: supabase/postgres:17.6.1.066
+    image: supabase/postgres:17.6.1.067
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres", "-h", "localhost"]
